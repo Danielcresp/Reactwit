@@ -5,8 +5,10 @@ class InputText extends Component{
     render(){
         return(
             //activar un ponponente desde componente Hijo
-            <form className={StyleSheet.from} onSubmit={this.props.onSendText}>
-                <textarea className={styles.text} name='text'></textarea>
+            <form className={styles.from} onSubmit={this.props.onSendText}>
+                <textarea className={styles.text} name='text'>
+                    {(this.props.userNameToReply) ? `@${this.props.userNameToReply} `:''}
+                </textarea>
                 <div className={styles.buttons}>
                     <button className={styles.close} onClick={this.props.onCloseText}>Cerrar</button>
                     <button className={styles.send} type='submit'>Enviar</button>

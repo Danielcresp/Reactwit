@@ -5,6 +5,7 @@ import styles from './message-list.css'
 class MessageList extends Component{
     constructor(props){
         super(props)
+        
     }
     render(){
         return(
@@ -18,6 +19,11 @@ class MessageList extends Component{
                     displayName={msg.displayName}
                     username={msg.username}
                     date={msg.date}
+                    numRetweets={msg.retweets}
+                    numFavorites={msg.favorites}
+                    onRetweet={()=> this.props.onRetweet(msg.id)} //para ejecutar la funcion en este mismo componente 
+                    onFavorite={()=> this.props.onFavorite(msg.id)}//se usa las arrowfunction y se pasa los parametros
+                    onReplyTweet={()=> this.props.onReplyTweet(msg.id,msg.username)}
                     />
                    ) 
                 }).reverse()}

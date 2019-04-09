@@ -4,6 +4,25 @@ import moment from 'moment';
 class Message extends Component{
     constructor(props){
         super(props)
+        this.state={
+            pressFavorite :false,
+            pressRetweet: false
+        }
+
+        this.onPressRetweet = this.onPressRetweet.bind(this) //bindear
+        this.onPressFavorite = this.onPressFavorite.bind(this)
+    }
+    onPressFavorite(){
+        this.props.onFavorite()
+        this.setState({
+            pressFavorite: true
+        })
+    }
+    onPressRetweet(){
+        this.props.onRetweet()
+        this.setState({
+            pressRetweet: true
+        })
     }
     render(){
         let dateFormat= moment (this.props.date).fromNow()
@@ -19,9 +38,23 @@ class Message extends Component{
                 </div>
                 <h3>{this.props.text}</h3>
                 <div className={style.buttons}>
-                    <div className={style.icon}><span className='fa fa-reply'></span></div>
-                    <div className={style.icon}><span className='fa fa-retweet'></span></div>
-                    <div className={style.icon}><span className='fa fa-star'></span></div>
+                    <div className={style.icon}
+                        onClick={this.props.onReplyTweet}
+                    >
+                        <span className='fa fa-reply'></span>
+                    </div>
+                    <div className={(this.state.pressRetweet) ? style.rtGreen : ''} //si estado es true de pressRetweet poner estilo sino no poner nada
+                         onClick={this.onPressRetweet}
+                    >
+                        <span className='fa fa-retweet'></span>
+                        <span className={style.num}>{this.props.numRetweets}</span>
+                    </div>
+                    <div className={(this.state.pressFavorite) ? style.favYellow : ''}
+                         onClick={this.onPressFavorite}
+                    >
+                        <span className='fa fa-star'></span>
+                        <span className={style.num}>{this.props.numFavorites}</span>
+                    </div>
                 </div>
             </div>
         )
