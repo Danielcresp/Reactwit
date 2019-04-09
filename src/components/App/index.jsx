@@ -12,7 +12,8 @@ class App extends Component{
             user:{
                 photoURL:'https://pbs.twimg.com/profile_images/933162275879264258/TCVHXlGs_400x400.jpg',
                 email:'oliverhelop@gmail.com',
-                onOpenText: false
+                onOpenText: false,
+                displayName: 'Holiver Helders'
             }
         }
     }

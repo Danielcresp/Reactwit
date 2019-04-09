@@ -25,14 +25,44 @@ class Main extends Component{
                 date:Date.now()-1800000
             }]
         }
+
+        this.handleSendText = this.handleSendText.bind(this)
+        this.handleCloseText = this.handleCloseText.bind(this)
+        this.handleOpenText = this.handleOpenText.bind(this);
+
+    }
+    handleSendText(event){
+        event.preventDefault()//eliminar comportamiento por defecto del evento
+        let newMessage={
+            id: uuid.v4(),
+            username: this.props.user.email.split('@')[0],
+            displayName: this.props.user.displayName,
+            picture: this.props.user.photoURL,
+            date: Date.now(),
+            text: event.target.text.value
+        }
+       this.setState({
+           messages: this.state.messages.concat(newMessage), //concatenar el new Twitt
+           openText:false
+       })
+    }
+    handleCloseText(event){
+        event.preventDefault()//eliminar comportamiento por defecto del evento
+        this.setState({openText:false})  //cambia el estado y al cambiar el estado se hace un render actualizando el DOM
     }
     handleOpenText(event){
         event.preventDefault()
+        //cambia el estado y al cambiar el estado se hace un render actualizando el DOM
         this.setState({openText:true})
     }
     renderOpenText(){
-        if(this.state.openText){
-            return <InputText/>
+        if(this.state.openText){ //mostrar o no mostar el elemento
+            return (
+                <InputText
+                    onSendText={this.handleSendText}
+                    onCloseText={this.handleCloseText}
+                />
+            )
         }
     }
     render(){
@@ -41,7 +71,7 @@ class Main extends Component{
                 <ProfileBar
                     picture={this.props.user.photoURL}
                     username={this.props.user.email.split('@')[0]}
-                    onOpenText={this.handleOpenText}
+                    onOpenText={this.handleOpenText} //indicas que ejecute la accion con el this de el componente local
                 />
                 {this.renderOpenText()}
                 <MessageList messages={this.state.messages}/>
