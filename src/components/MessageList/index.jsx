@@ -12,7 +12,7 @@ class MessageList extends Component{
                 {this.props.messages.map(msg=> {
                    return (
                     <Message 
-                    key={msg.text}
+                    key={msg.id}
                     text={msg.text}
                     picture={msg.picture}
                     displayName={msg.displayName}
