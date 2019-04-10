@@ -1,4 +1,5 @@
 import React,{Component} from 'react'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 import style from './message.css'
 import moment from 'moment';
 class Message extends Component{
@@ -26,12 +27,15 @@ class Message extends Component{
     }
     render(){
         let dateFormat= moment (this.props.date).fromNow()
+        let userLink =`/user/${this.props.username}`
         return(
             <div className={style.root}>
                 <div className={style.user}>
+                  <Link to={userLink}>
                     <figure>
                         <img className={style.avatar} src={this.props.picture}></img>
                     </figure>
+                  </Link>
                     <span className={style.displayName}>{this.props.displayName}</span>
                     <span className={style.username}>{this.props.username}</span>
                     <span className={style.date}>{dateFormat}</span>
