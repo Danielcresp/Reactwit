@@ -7,6 +7,7 @@ import Header from '../Header'
 import Main from '../Main'
 import Profile from '../Profile'
 import Login from '../Login'
+import Fotter from '../Footer'
 
 class App extends Component{
     constructor(){
@@ -24,10 +25,8 @@ class App extends Component{
     handleOnAuth(){
         console.log('Auth')
     }
-    
     render(){
         return(
-            
             <Router>
                 <div>
                     <Header/>
@@ -55,11 +54,10 @@ class App extends Component{
                             // emailAddress={this.state.user.email}
                           />
                     )} />
+                    <Fotter/>
                 </div>
             </Router>
         )
-
     }
-
 }
 export default App

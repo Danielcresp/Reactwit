@@ -1,0 +1,18 @@
+.root{
+    text-align: center;
+    display: flex;
+    justify-content:center;
+    background-color: #2b84cc;
+    flex-direction:column ;
+    margin: 2pt;
+}
+.text{
+    padding: 2px;
+}
+.info{
+    color: #ffff;
+    font-size: 32px;
+}
+.redes{
+    color: #ffff;
+}
