@@ -7,7 +7,8 @@ function Footer(){
     return(
         <div className={styles.root}>
             <div className={styles.info}>
-                <p>Reactweet</p>
+                <p>Reactwit<br></br><span className={styles.copi}>©reactwit</span></p>
+                
             </div>
             <div className={styles.redes}>
                 <p className={styles.text}>

@@ -1,6 +1,6 @@
 .root{
     display: flex;
-    background: #2d84cc;
+    background: #2b84cc;
     align-items: center;
     justify-content: space-between;
     color: #fff;
@@ -9,5 +9,5 @@
 .logo{
     margin:0;
     color: #fff;
-    font-size: 14px;
+    font-size: 20px;
 }

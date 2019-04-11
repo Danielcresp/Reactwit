@@ -1,7 +1,9 @@
 import React,{Component} from 'react'
+import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 import style from './message.css'
 import moment from 'moment';
+
 class Message extends Component{
     constructor(props){
         super(props)
@@ -63,5 +65,19 @@ class Message extends Component{
             </div>
         )
     }
+}
+//Definir de que tipo es cada propíedad Heredada
+//Validar todas las propiedades
+Component.propTypes = {
+    onFavorite: PropTypes.func.isRequired, //es de tipo function y que es requerido
+    onRetweet: PropTypes.func.isRequired,
+    onReplyTweet: PropTypes.func.isRequired,
+    username:PropTypes.string.isRequired, //es de tipo string y que es requerido
+    picture: PropTypes.string.isRequired,
+    displayName: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    date: PropTypes.number.isRequired, //es de tipo number y que es requerido
+    numFavorites: PropTypes.number.isRequired,
+    numRetweets: PropTypes.number.isRequired,
 }
 export default Message

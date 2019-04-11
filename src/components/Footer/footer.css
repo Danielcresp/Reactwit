@@ -3,16 +3,37 @@
     display: flex;
     justify-content:center;
     background-color: #2b84cc;
-    flex-direction:column ;
-    margin: 2pt;
+    flex-direction:row ;
+    width: 100%;
+    height: 120px;
+    bottom: 0;
+    /* position: fixed; */
+    position: relative;
+    /* Altura total del footer en px con valor negativo */
+    margin-top: 50px;
+    /* Altura del footer en px. Se han restado los 5px del margen
+       superior mas los 5px del margen inferior
+    */
+    padding:5px 0px;
+    clear: both;
+    text-align: center;
+    color: #fff;
 }
 .text{
     padding: 2px;
 }
 .info{
     color: #ffff;
-    font-size: 32px;
+    font-size: 30px;
+    padding-right: 10px;
+    margin: 10px;
 }
 .redes{
     color: #ffff;
+}
+.copi{
+    font-size: 15px; 
+    padding-right: -20px;
+    padding-top: -20px;
+
 }

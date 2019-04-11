@@ -1,4 +1,5 @@
 import React,{Component} from 'react'
+import PropTypes from 'prop-types'
 import uuid from 'uuid'
 import MessageList from '../MessageList'
 import InputText from '../InputText'
@@ -142,5 +143,9 @@ class Main extends Component{
             </div>
         )
     }
+}
+//Proptypes
+Component.prototypes={
+    user: PropTypes.object.isRequired
 }
 export default Main
