@@ -6,6 +6,7 @@ import styles from './app.css'
 import Header from '../Header'
 import Main from '../Main'
 import Profile from '../Profile'
+import Login from '../Login'
 
 class App extends Component{
     constructor(){
@@ -18,6 +19,10 @@ class App extends Component{
                 displayName: 'Holiver Helders'
             }
         }
+        this.handleOnAuth = this.handleOnAuth.bind(this);
+    }
+    handleOnAuth(){
+        console.log('Auth')
     }
     
     render(){
@@ -27,8 +32,8 @@ class App extends Component{
                 <div>
                     <Header/>
                     <Route exact path="/" render={()=>
-                        //Verificar si existe un usuario sino mandar a login
-                        (this.state.user) ?  <Main user={this.state.user}/>: '' //if y else en usa sola linea
+                        //Verificar si existe un usuario logeado sino mandar a login
+                        (this.state.user) ?  <Main user={this.state.user}/>:  <Login onAuth={this.handleOnAuth}/>//if y else en usa sola linea
                     } />
                     <Route path="/profile" render={()=>( 
                         //render <Profile>
