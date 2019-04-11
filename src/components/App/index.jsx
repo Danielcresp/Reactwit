@@ -1,10 +1,11 @@
 import React ,{Component} from 'react'
 import 'normalize-css'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom"
-import styles from './app.css'
 
+import styles from './app.css'
 import Header from '../Header'
 import Main from '../Main'
+import Profile from '../Profile'
 
 class App extends Component{
     constructor(){
@@ -17,16 +18,8 @@ class App extends Component{
                 displayName: 'Holiver Helders'
             }
         }
-        this.Mai = this.Mai.bind(this) //bindear
-
     }
     
-    Mai(){
-        if(this.state.user){
-            <Main user={this.state.user}/>
-        }else{
-        }
-    }
     render(){
         return(
             
@@ -37,12 +30,26 @@ class App extends Component{
                         //Verificar si existe un usuario sino mandar a login
                         (this.state.user) ?  <Main user={this.state.user}/>: '' //if y else en usa sola linea
                     } />
-                    <Route path="/profile" render={()=>{
+                    <Route path="/profile" render={()=>( 
                         //render <Profile>
-                    }} />
-                    <Route path="/about" render={(params)=>{
-                        //render <Profile> pasando  params:username
-                    }} />
+                        <Profile
+                            picture={this.state.user.photoURL}
+                            username={this.state.user.email.split('@')[0]}
+                            displayName={this.state.user.displayName}
+                            location={this.state.user.location}
+                            emailAddress={this.state.user.email}
+                        />
+                    )} />
+                    <Route path="/user/:username" render={({ match })=>( 
+                         //render <Profile> pasando  params:username
+                         <Profile
+                            //picture={params.username}
+                            username={match.params.username}
+                            displayName={match.params.username}
+                            // location={this.state.user.location}
+                            // emailAddress={this.state.user.email}
+                          />
+                    )} />
                 </div>
             </Router>
         )

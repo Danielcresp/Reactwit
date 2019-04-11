@@ -25278,6 +25278,10 @@
 
 	var _Main2 = _interopRequireDefault(_Main);
 
+	var _Profile = __webpack_require__(204);
+
+	var _Profile2 = _interopRequireDefault(_Profile);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25317,16 +25321,37 @@
 	                    'div',
 	                    null,
 	                    _react2.default.createElement(_Header2.default, null),
-	                    _react2.default.createElement(_reactRouterDom.Route, { path: '/', exact: true, render: function render() {
-	                            if (_this2.state.user) {
-	                                _react2.default.createElement(_Main2.default, { user: _this2.state.user });
-	                            } else {}
-	                        } }),
+	                    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', render: function render() {
+	                            return (
+	                                //Verificar si existe un usuario sino mandar a login
+	                                _this2.state.user ? _react2.default.createElement(_Main2.default, { user: _this2.state.user }) : ''
+	                            );
+	                        } //if y else en usa sola linea
+	                    }),
 	                    _react2.default.createElement(_reactRouterDom.Route, { path: '/profile', render: function render() {
-	                            //render <Profile>
+	                            return (
+	                                //render <Profile>
+	                                _react2.default.createElement(_Profile2.default, {
+	                                    picture: _this2.state.user.photoURL,
+	                                    username: _this2.state.user.email.split('@')[0],
+	                                    displayName: _this2.state.user.displayName,
+	                                    location: _this2.state.user.location,
+	                                    emailAddress: _this2.state.user.email
+	                                })
+	                            );
 	                        } }),
-	                    _react2.default.createElement(_reactRouterDom.Route, { path: '/about', render: function render(params) {
-	                            //render <Profile> pasando  params:username
+	                    _react2.default.createElement(_reactRouterDom.Route, { path: '/user/:username', render: function render(_ref) {
+	                            var match = _ref.match;
+	                            return (
+	                                //render <Profile> pasando  params:username
+	                                _react2.default.createElement(_Profile2.default
+	                                //picture={params.username}
+	                                , { username: match.params.username,
+	                                    displayName: match.params.username
+	                                    // location={this.state.user.location}
+	                                    // emailAddress={this.state.user.email}
+	                                })
+	                            );
 	                        } })
 	                )
 	            );
@@ -30483,6 +30508,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRouterDom = __webpack_require__(22);
+
 	var _message = __webpack_require__(64);
 
 	var _message2 = _interopRequireDefault(_message);
@@ -30545,7 +30572,7 @@
 	                    'div',
 	                    { className: _message2.default.user },
 	                    _react2.default.createElement(
-	                        Link,
+	                        _reactRouterDom.Link,
 	                        { to: userLink },
 	                        _react2.default.createElement(
 	                            'figure',
@@ -47950,6 +47977,8 @@
 
 	var _profileBar2 = _interopRequireDefault(_profileBar);
 
+	var _reactRouterDom = __webpack_require__(22);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -47970,13 +47999,18 @@
 	    _createClass(ProfileBar, [{
 	        key: 'render',
 	        value: function render() {
+	            var url = '/profile';
 	            return _react2.default.createElement(
 	                'div',
 	                { className: _profileBar2.default.root },
 	                _react2.default.createElement(
-	                    'figure',
-	                    null,
-	                    _react2.default.createElement('img', { className: _profileBar2.default.avatar, src: this.props.picture })
+	                    _reactRouterDom.Link,
+	                    { to: url },
+	                    _react2.default.createElement(
+	                        'figure',
+	                        null,
+	                        _react2.default.createElement('img', { className: _profileBar2.default.avatar, src: this.props.picture })
+	                    )
 	                ),
 	                _react2.default.createElement(
 	                    'span',
@@ -48043,6 +48077,140 @@
 		"avatar": "profile-bar__avatar__2pA03",
 		"username": "profile-bar__username__1-iDN",
 		"button": "profile-bar__button__WeTn5"
+	};
+
+/***/ }),
+/* 204 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _profile = __webpack_require__(205);
+
+	var _profile2 = _interopRequireDefault(_profile);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Profile = function (_Component) {
+	    _inherits(Profile, _Component);
+
+	    function Profile() {
+	        _classCallCheck(this, Profile);
+
+	        return _possibleConstructorReturn(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).apply(this, arguments));
+	    }
+
+	    _createClass(Profile, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: _profile2.default.root },
+	                _react2.default.createElement('img', { className: _profile2.default.avatar, src: this.props.picture }),
+	                _react2.default.createElement(
+	                    'span',
+	                    { className: _profile2.default.name },
+	                    this.props.displayName
+	                ),
+	                _react2.default.createElement(
+	                    'ul',
+	                    { className: _profile2.default.data },
+	                    _react2.default.createElement(
+	                        'li',
+	                        null,
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'fa fa-user' },
+	                            this.props.username
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'li',
+	                        null,
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'fa fa-envelope' },
+	                            this.props.emailAddress
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'li',
+	                        null,
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'fa fa-map-marker' },
+	                            this.props.location
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Profile;
+	}(_react.Component);
+
+	exports.default = Profile;
+
+/***/ }),
+/* 205 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(206);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(52)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../../../node_modules/css-loader/index.js?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]!./profile.css", function() {
+				var newContent = require("!!../../../node_modules/css-loader/index.js?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]!./profile.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ }),
+/* 206 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(51)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".profile__root__zwUk9{\r\n    display: flex;\r\n    flex-direction: column;\r\n    margin: 0 auto;\r\n}\r\n.profile__avatar__1oujU{\r\n    width: 150px;\r\n    height: 150px;\r\n    border-radius: 50%;\r\n    margin: 1em auto;\r\n}\r\n.profile__name__3rRiA{\r\n    font-weight: 700;\r\n    font-size:20pt;\r\n}\r\n.profile__data__1ymE-{\r\n    list-style-type: none;\r\n    margin:1em 0;\r\n    padding: 0;\r\n}\r\n.profile__data__1ymE- > li{\r\n    background-color:#fff;\r\n    padding: 1em;\r\n    margin: 0;\r\n    border: 1px solid #ddd;\r\n    color: #777;\r\n}", ""]);
+
+	// exports
+	exports.locals = {
+		"root": "profile__root__zwUk9",
+		"avatar": "profile__avatar__1oujU",
+		"name": "profile__name__3rRiA",
+		"data": "profile__data__1ymE-"
 	};
 
 /***/ })
