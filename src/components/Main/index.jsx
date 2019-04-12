@@ -1,4 +1,5 @@
 import React,{Component} from 'react'
+import firebase from 'firebase';
 import PropTypes from 'prop-types'
 import uuid from 'uuid'
 import MessageList from '../MessageList'
@@ -42,6 +43,15 @@ class Main extends Component{
         this.handleReplyTweet = this.handleReplyTweet.bind(this)
 
     }
+    componentWillMount(){//estar escuchando un cambio y puedo obtener los mensajes almacenados en firebase
+        const messageRef = firebase.database().ref().child('messages')//hacer refrencia a DB al objeto de messajes
+        messageRef.on('child_added' , snapshot =>{ // cada ves que agrege un child hacer una captura en tiempo real a DB
+            this.setState({
+                messages : this.state.messages.concat(snapshot.val()), //
+                onOpenText: false 
+            })
+        })
+    }
     handleSendText(event){
         event.preventDefault()//eliminar comportamiento por defecto del evento
         let newMessage={
@@ -50,8 +60,13 @@ class Main extends Component{
             displayName: this.props.user.displayName,
             picture: this.props.user.photoURL,
             date: Date.now(),
-            text: event.target.text.value
+            text: event.target.text.value,
+            favorites:0,
+            retweets:0
         }
+        const messageRef = firebase.database().ref().child('messages')//Crear nuevo mensaje
+        const messageID = messageRef.push()//eviar mensaje a base de datos de firebase
+        messageID.set(newMessage) //mandar parametros del mensaje para ser creado en view
        this.setState({
            messages: this.state.messages.concat(newMessage), //concatenar el new Twitt
            openText:false
