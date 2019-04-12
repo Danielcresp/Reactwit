@@ -1,4 +1,5 @@
 import React ,{Component} from 'react'
+import firebase from 'firebase';
 import 'normalize-css'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 
@@ -13,17 +14,27 @@ class App extends Component{
     constructor(){
         super()
         this.state={
-            user:{
-                photoURL:'https://pbs.twimg.com/profile_images/933162275879264258/TCVHXlGs_400x400.jpg',
-                email:'oliverhelop@gmail.com',
-                onOpenText: false,
-                displayName: 'Holiver Helders'
-            }
+            user: null
         }
         this.handleOnAuth = this.handleOnAuth.bind(this);
     }
+    //Sirve par aplicasiones isomorficas que esten renderisadosas desde el sevidor
+    componentWillMount (){//mantener l usurio en el render 
+        firebase.auth().onAuthStateChanged(user =>{
+            if (user){
+                this.setState({user})
+            }else{
+                this.setState({user: null})
+            }
+        })
+    }
     handleOnAuth(){
-        console.log('Auth')
+        const provider = new firebase.auth.GithubAuthProvider() //utilisar  auth de github 
+        firebase.auth()
+            .signInWithPopup(provider) //ventana de si quiere iniciar session con el proveedor
+            //Promesas
+            .them(result => console.log(`${result.user.email} has iniciado sesion`))
+            .catch(error => console.error(`Error: ${error.code}:${error.message}`))
     }
     render(){
         return(

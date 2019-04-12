@@ -32,6 +32,7 @@
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
+    "firebase": "^5.9.3",
     "moment": "^2.24.0",
     "normalize-css": "^2.3.1",
     "prop-types": "^15.7.2",
