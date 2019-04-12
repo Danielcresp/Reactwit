@@ -17,6 +17,7 @@ class App extends Component{
             user: null
         }
         this.handleOnAuth = this.handleOnAuth.bind(this);
+        this.handleLogout = this.handleLogout.bind(this);
     }
     //Sirve par aplicasiones isomorficas que esten renderisadosas desde el sevidor
     componentWillMount (){//mantener l usurio en el render 
@@ -36,6 +37,11 @@ class App extends Component{
             .them(result => console.log(`${result.user.email} has iniciado sesion`))
             .catch(error => console.error(`Error: ${error.code}:${error.message}`))
     }
+    handleLogout(){
+        firebase.auth().signOut()
+        .then(()=> console.log('te has desconectado'))
+        .catch(()=> console.error('Ocurrio un error'))
+    }
     render(){
         return(
             <Router>
@@ -43,7 +49,7 @@ class App extends Component{
                     <Header/>
                     <Route exact path="/" render={()=>
                         //Verificar si existe un usuario logeado sino mandar a login
-                        (this.state.user) ?  <Main user={this.state.user}/>:  <Login onAuth={this.handleOnAuth}/>//if y else en usa sola linea
+                        (this.state.user) ?  <Main user={this.state.user} onLogout={this.handleLogout}/>:  <Login onAuth={this.handleOnAuth}/>//if y else en usa sola linea
                     } />
                     <Route path="/profile" render={()=>( 
                         //render <Profile>

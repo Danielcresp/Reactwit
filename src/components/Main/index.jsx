@@ -23,10 +23,10 @@ class Main extends Component{
             },
             {
                 id: uuid.v4(),
-                text: 'DJ DONDia',
-                picture:'https://pbs.twimg.com/profile_images/1049771810588385280/zyDdt5IL_400x400.jpg',
-                displayName: 'Don Dia',
-                username: 'dondia',
+                text: ' Hola soy KSHMR',
+                picture:'https://pbs.twimg.com/profile_images/1006568691436154880/8RDUqH5d_400x400.jpg',
+                displayName: 'KSHMR',
+                username: 'dharmaKSHMR',
                 date:Date.now()-1800000,
                 retweets: 0,
                 favorites: 0,
@@ -132,6 +132,7 @@ class Main extends Component{
                     picture={this.props.user.photoURL}
                     username={this.props.user.email.split('@')[0]}
                     onOpenText={this.handleOpenText} //indicas que ejecute la accion con el this de el componente local
+                    onLogout={this.props.onLogout}
                 />
                 {this.renderOpenText()}
                 <MessageList 
@@ -146,6 +147,7 @@ class Main extends Component{
 }
 //Proptypes
 Component.prototypes={
-    user: PropTypes.object.isRequired
+    user: PropTypes.object.isRequired,
+    onLogout: PropTypes.func
 }
 export default Main
