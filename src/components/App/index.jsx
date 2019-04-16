@@ -1,5 +1,6 @@
 import React ,{Component} from 'react'
-import firebase from 'firebase';
+import firebase from 'firebase'
+
 import 'normalize-css'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 
@@ -14,11 +15,26 @@ class App extends Component{
     constructor(){
         super()
         this.state={
-            user: null
+            user: null,
+            isSignedIn: false
         }
-        this.handleOnAuth = this.handleOnAuth.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
+
+        this.uiConfig = {
+            signInFlow: "popup",
+            signInOptions: [
+              firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+              firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+              firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+              firebase.auth.GithubAuthProvider.PROVIDER_ID,
+              firebase.auth.EmailAuthProvider.PROVIDER_ID
+            ],
+            callbacks: {
+              signInSuccess: () => false
+            }
+          }
     }
+
     //Sirve par aplicasiones isomorficas que esten renderisadosas desde el sevidor
     componentWillMount (){//mantener l usurio en el render 
         firebase.auth().onAuthStateChanged(user =>{
@@ -29,14 +45,7 @@ class App extends Component{
             }
         })
     }
-    handleOnAuth(){
-        const provider = new firebase.auth.GithubAuthProvider() //utilisar  auth de github 
-        firebase.auth()
-            .signInWithPopup(provider) //ventana de si quiere iniciar session con el proveedor
-            //Promesas
-            .them(result => console.log(`${result.user.email} has iniciado sesion`))
-            .catch(error => console.error(`Error: ${error.code}:${error.message}`))
-    }
+
     handleLogout(){
         firebase.auth().signOut()
         .then(()=> console.log('te has desconectado'))
@@ -46,10 +55,12 @@ class App extends Component{
         return(
             <Router>
                 <div>
-                    <Header/>
+                    <Header user={this.state.user} onLogout={this.handleLogout}s/>
                     <Route exact path="/" render={()=>
                         //Verificar si existe un usuario logeado sino mandar a login
-                        (this.state.user) ?  <Main user={this.state.user} onLogout={this.handleLogout}/>:  <Login onAuth={this.handleOnAuth}/>//if y else en usa sola linea
+                        (this.state.user) ?  <Main user={this.state.user} onLogout={this.handleLogout}/>
+                        :  <Login uiConfig={this.uiConfig} 
+                                firebaseAuth={firebase.auth()}/>//if y else en usa sola linea
                     } />
                     <Route path="/profile" render={()=>( 
                         //render <Profile>

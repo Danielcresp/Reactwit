@@ -4,12 +4,12 @@ import Message from '../Message'
 import styles from './message-list.css'
 
 //Component Representacional
-function MessageList ({messages,onRetweet,onFavorite,onReplyTweet}){
+function MessageList ({messages,onRetweet,onFavorite,onReplyTweet,username}){
     return(
         <div className={styles.root}>
             {messages.map(msg=> {
                return (
-                <Message 
+                (msg.username != username) ? '' : <Message 
                 key={msg.id}
                 text={msg.text}
                 picture={msg.picture}

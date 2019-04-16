@@ -11,8 +11,8 @@ function InputText ({onSendText,userNameToReply,onCloseText}){
                 {(userNameToReply) ? `@${userNameToReply} `:''}
             </textarea>
             <div className={styles.buttons}>
-                <button className={styles.close} onClick={onCloseText}>Cerrar</button>
-                <button className={styles.send} type='submit'>Enviar</button>
+                <button className={styles.close} onClick={onCloseText}><i className="fas fa-lg fa-times"></i></button>
+                <button className={styles.send} type='submit'><i className="far fa-paper-plane"></i>Enviar</button>
             </div>
         </form>
     )

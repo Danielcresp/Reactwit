@@ -1,10 +1,10 @@
 import React ,{Component}from 'react'
 import PropTypes from 'prop-types'
-import styles from './profile-bar.css'
+import styles from './ours-list.css'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 
 
-function ProfileBar({picture,username,onOpenText,onPicture}){
+function OursList({picture,username,onFollow,onPicture}){
     return (
         <div className={styles.root}>
            <Link to='/profile'>
@@ -14,8 +14,8 @@ function ProfileBar({picture,username,onOpenText,onPicture}){
             </Link>    
             <span className={styles.username}>@{username}¡</span>
             <div className={styles.buttons}>
-            <button onClick={onOpenText} className={styles.button}>
-                <span className={"fa fa-lg fa-edit"}></span>Tweet
+            <button onClick={onFollow} className={styles.button}>
+                <span className={"fa fa-lg fa-edit"}></span>Follow
             </button>
             <button onClick={onPicture} className={styles.button}>
                 <span className={'far fa-lg fa-image'}></span>
@@ -27,7 +27,7 @@ function ProfileBar({picture,username,onOpenText,onPicture}){
 Component.propTypes={
     picture: PropTypes.string.isRequired,
     username: PropTypes.string.isRequired,
-    onOpenText: PropTypes.func
+    onFollow: PropTypes.func
 }
 
-export default ProfileBar;
+export default OursList;

@@ -1,6 +1,5 @@
 .root{
     display: flex;
-    flex-direction: column;
     margin: 0 auto;
 }
 .avatar{
@@ -8,20 +7,43 @@
     height: 150px;
     border-radius: 50%;
     margin: 1em auto;
+    justify-content: center;
 }
 .name{
     font-weight: 700;
     font-size:20pt;
+    justify-content: center;
 }
-.data{
-    list-style-type: none;
+.backg{
+    justify-content: center;
+}
+.perfil{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.myour{
     margin:1em 0;
-    padding: 0;
+    display: flex;
+    justify-content: center;
 }
-.data > li{
+.myour div{
     background-color:#fff;
     padding: 1em;
     margin: 0;
     border: 1px solid #ddd;
     color: #777;
 }
+.info{
+    margin:1em 0;
+    padding: 0;
+   justify-content: center;
+}
+.info div{
+    background-color:#fff;
+    padding: 1em;
+    margin: 0;
+    border: 1px solid #ddd;
+    color: #777;
+}
+

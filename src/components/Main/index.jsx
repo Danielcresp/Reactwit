@@ -5,6 +5,9 @@ import uuid from 'uuid'
 import MessageList from '../MessageList'
 import InputText from '../InputText'
 import ProfileBar from '../ProfileBar'
+import YouList from '../YouList'
+import styles from './main.css'
+import OursList from '../OursList';
 class Main extends Component{
     constructor(props){
         super(props)
@@ -142,20 +145,57 @@ class Main extends Component{
     }
     render(){
         return (
-            <div>
-                <ProfileBar
-                    picture={this.props.user.photoURL}
+            <div className={'container-fluid'}>
+                <div className={[ styles.main, 'row'].join('')}>
+                    <div className={[ styles.my, 'col-md-4'].join('')}>
+                    <p>MY</p>
+                    <ProfileBar
+                        picture={this.props.user.photoURL}
+                        username={this.props.user.email.split('@')[0]}
+                        onOpenText={this.handleOpenText} //indicas que ejecute la accion con el this de el componente local
+                        onLogout={this.props.onLogout}
+                    />
+                    {this.renderOpenText()}
+                    <MessageList 
                     username={this.props.user.email.split('@')[0]}
-                    onOpenText={this.handleOpenText} //indicas que ejecute la accion con el this de el componente local
-                    onLogout={this.props.onLogout}
-                />
-                {this.renderOpenText()}
-                <MessageList 
-                messages={this.state.messages}
-                onRetweet={this.handleRetweet}
-                onFavorite={this.handleFavorite}
-                onReplyTweet={this.handleReplyTweet}
-                />
+                    messages={this.state.messages}
+                    onRetweet={this.handleRetweet}
+                    onFavorite={this.handleFavorite}
+                    onReplyTweet={this.handleReplyTweet}
+                    />
+                    </div> 
+                    <div className={[ styles.you, 'col-md-4'].join('')}>
+                    <p>YOU</p>
+                    <YouList
+                    username={this.props.user.email.split('@')[0]}
+                    messages={this.state.messages}
+                    onRetweet={this.handleRetweet}
+                    onFavorite={this.handleFavorite}
+                    onReplyTweet={this.handleReplyTweet}
+                    />
+                    </div>
+                    <div className={[ styles.ours, 'col-md-4'].join('')}>
+                    <p>Ours</p>
+                    <OursList
+                        picture={this.props.user.photoURL}
+                        username={this.props.user.email.split('@')[0]}
+                        onOpenText={this.handleOpenText} //indicas que ejecute la accion con el this de el componente local
+                        onLogout={this.props.onLogout}
+                    />
+                    <OursList
+                        picture={this.props.user.photoURL}
+                        username={this.props.user.email.split('@')[0]}
+                        onOpenText={this.handleOpenText} //indicas que ejecute la accion con el this de el componente local
+                        onLogout={this.props.onLogout}
+                    />
+                    <OursList
+                        picture={this.props.user.photoURL}
+                        username={this.props.user.email.split('@')[0]}
+                        onOpenText={this.handleOpenText} //indicas que ejecute la accion con el this de el componente local
+                        onLogout={this.props.onLogout}
+                    />
+                    </div>
+                </div>
             </div>
         )
     }

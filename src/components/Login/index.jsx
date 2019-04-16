@@ -1,19 +1,23 @@
 //Import
 import React ,{Component} from 'react'
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import PropTypes from 'prop-types'
 import styles from './login.css'
 
+
 //Componente Representacional
-function Login({onAuth}){
+function Login({uiConfig,firebaseAuth}){
     return(
         <div className={styles.root}>
-            <p className={styles.text}>
-                Inicia Sesion con GitHub para que puedas leer y escribir mensajes
-            </p>
-            <button className={styles.button}
-                onClick={onAuth}>
-            <span className='fab fa-github '></span> Login with GitHub
-            </button>
+            <div className={styles.nav}>
+                <p className={styles.text}>
+                    Inicia Sesion 
+                </p>
+                <StyledFirebaseAuth
+                    uiConfig={uiConfig}
+                    firebaseAuth={firebaseAuth}
+                />
+            </div>
         </div>
     )
 }

@@ -7,7 +7,7 @@ function Footer(){
     return(
         <div className={styles.root}>
             <div className={styles.info}>
-                <p>Reactwit<br></br><span className={styles.copi}>©reactwit</span></p>
+                <p>Myours<br></br><span className={styles.copi}>Copyright © 2019 </span></p>
                 
             </div>
             <div className={styles.redes}>

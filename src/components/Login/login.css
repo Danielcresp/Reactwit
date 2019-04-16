@@ -1,14 +1,24 @@
 .root{
     margin: 0 1em;
     text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
 }
 .text{
     color: #888;
 }
-.button{
-    border:#666;
+.mdl-button{
     border-radius: 5px;
-    padding: 0.5em 1em;
-    background-color: #aaa;
-    color: #eaeaea;
+}
+.nav{
+    flex-direction: column;
+    width: 400px;
+    display: inline-flex;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 0.5em;
+    padding: 2em; 
+ 
 }
