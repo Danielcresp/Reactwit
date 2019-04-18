@@ -101,12 +101,43 @@ class Main extends Component{
         })
         }
     }
-    handleFavorite(msgId){
+    handleFavorite(msgId,doc){
+        // var hopperRef = usersRef.child("gracehop") //Variable para aceder a actulizar BD de firebase
         let alreadyFavorited = this.state.user.favorites.filter(fav => fav == msgId)//comprovar si asido favorito
         if (alreadyFavorited.length==0){ 
+
             let messages = this.state.messages.map(msg =>{//crear el array con los favoritos modificados
                 if(msg.id==msgId){
-                    msg.favorites++
+                    
+                    let favoplus= msg.favorites++  
+                    console.log(msgId)     
+                    let Id = this.state.user.messages
+                    // let key = firebase.ref().child("messages").push().getKey()
+                    //  Log.i("id", msgId); 
+
+                    // console.log(key)
+                    console.log(favoplus)
+                    //Update firebase
+
+                    // var cityRef = firebase.database().ref().child('messages')
+                    // console.log(cityRef)
+
+                    // Set the 'capital' field of the city
+                    // var updateSingle = cityRef.update({ favorites: 3 });
+
+                    //Actualizar datos en firebase 
+                    // var postData={
+                    //     favorites: favoplus 
+                    // }
+                    // var newPostKey = firebase.database().ref().child('mesagess').push().key;  
+                    // var updates = {};
+                    // updates[newPostKey] = postData;
+                    // updates[msgId + '/' + newPostKey] = postData;
+                    // return firebase.database().ref().update(updates);
+                    // var cityRef = db.collection('messages').doc('DC');
+
+                    // // Set the 'capital' field of the city
+                    // var updateSingle = cityRef.update({ capital: true });
                 }
                 return msg
             })
@@ -157,21 +188,21 @@ class Main extends Component{
                     />
                     {this.renderOpenText()}
                     <MessageList 
-                    username={this.props.user.email.split('@')[0]}
-                    messages={this.state.messages}
-                    onRetweet={this.handleRetweet}
-                    onFavorite={this.handleFavorite}
-                    onReplyTweet={this.handleReplyTweet}
+                        username={this.props.user.email.split('@')[0]}
+                        messages={this.state.messages}
+                        onRetweet={this.handleRetweet}
+                        onFavorite={this.handleFavorite}
+                        onReplyTweet={this.handleReplyTweet}
                     />
                     </div> 
                     <div className={[ styles.you, 'col-md-4'].join('')}>
                     <p>YOU</p>
                     <YouList
-                    username={this.props.user.email.split('@')[0]}
-                    messages={this.state.messages}
-                    onRetweet={this.handleRetweet}
-                    onFavorite={this.handleFavorite}
-                    onReplyTweet={this.handleReplyTweet}
+                        username={this.props.user.email.split('@')[0]}
+                        messages={this.state.messages}
+                        onRetweet={this.handleRetweet}
+                        onFavorite={this.handleFavorite}
+                        onReplyTweet={this.handleReplyTweet}
                     />
                     </div>
                     <div className={[ styles.ours, 'col-md-4'].join('')}>

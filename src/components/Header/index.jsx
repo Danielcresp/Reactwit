@@ -27,10 +27,10 @@ class Header extends Component{
                    <input className={[styles.search,"form-control"].join(' ')} placeholder='Search'></input>
                </div>
                <div className={[styles.perfil,"col-md-4 ml-auto"].join(' ')}>
-                   <img className={[styles.avatar, 'mr-4'].join(' ')}></img>
-                   <button className="btn btn-primary mr-2">Mention</button>
-                   <button className='btn btn-primary mr-2'>React</button>
-                   <button className='btn btn-primary mr-2'>Tweet</button>
+                   <img src={this.props.user.photoURL} className={[styles.avatar, 'mr-4'].join(' ')}></img>
+                   <button className="btn btn-primary mr-2">Mention </button>
+                   <button className='btn btn-primary mr-2'>React </button>
+                   <button className='btn btn-primary mr-2'>Tweet </button>
                    <button onClick={this.props.onLogout} className='btn btn-primary'>
                     <span className={'fa fa-sign-out-alt'}>Salir</span>
                   </button>

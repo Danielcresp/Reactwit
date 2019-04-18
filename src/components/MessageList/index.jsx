@@ -5,6 +5,8 @@ import styles from './message-list.css'
 
 //Component Representacional
 function MessageList ({messages,onRetweet,onFavorite,onReplyTweet,username}){
+    // let key = firebaseRef.child("messages").push().getKey(); Log.i("id", msgId); 
+
     return(
         <div className={styles.root}>
             {messages.map(msg=> {
@@ -19,7 +21,7 @@ function MessageList ({messages,onRetweet,onFavorite,onReplyTweet,username}){
                 numRetweets={msg.retweets}
                 numFavorites={msg.favorites}
                 onRetweet={()=> onRetweet(msg.id)} //para ejecutar la funcion en este mismo componente 
-                onFavorite={()=> onFavorite(msg.id)}//se usa las arrowfunction y se pasa los parametros
+                onFavorite={()=> onFavorite(msg.id,msg)}//se usa las arrowfunction y se pasa los parametros
                 onReplyTweet={()=> onReplyTweet(msg.id,msg.username)}
                 />
                ) 

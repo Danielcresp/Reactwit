@@ -75,11 +75,11 @@ class App extends Component{
                     <Route path="/user/:username" render={({ match })=>( 
                          //render <Profile> pasando  params:username
                          <Profile
-                            //picture={params.username}
+                            picture={match.params.picture}
                             username={match.params.username}
                             displayName={match.params.username}
-                            // location={this.state.user.location}
-                            // emailAddress={this.state.user.email}
+                            location={match.params.location}
+                            emailAddress={match.params.username}
                           />
                     )} />
                     <Fotter/>
